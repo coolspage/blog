@@ -1,9 +1,9 @@
-name: vue
+name: deploy
 
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   build:
