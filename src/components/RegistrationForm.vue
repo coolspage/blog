@@ -1,18 +1,11 @@
 <template>
-  <div>
-    <h1>注册</h1>
+  <el-card shadow="hover" class="loginCard">
     <form @submit.prevent="submitForm">
-      <div>
-        <label for="username">用户名：</label>
-        <input type="text" id="username" v-model="username">
-      </div>
-      <div>
-        <label for="password">密码：</label>
-        <input type="password" id="password" v-model="password">
-      </div>
-      <button type="submit" class="btn btn-primary">注册</button>
+      <el-input id="username" v-model="username" placeholder="用户名" class="input"/>
+      <el-input id="password" type="password" v-model="password" placeholder="密码" class="input" show-password/>
+      <el-button type="submit">注册</el-button>
     </form>
-  </div>
+  </el-card>
 </template>
 
 <script>
@@ -47,12 +40,8 @@ export default {
 </script>
 
 <style>
-.btn-primary {
-  background-color: blue;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
+.loginCard {
+  width: 400px;
+  margin: auto;
 }
 </style>

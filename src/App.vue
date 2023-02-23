@@ -1,5 +1,5 @@
 <script setup>
-import {ref} from 'vue'
+import {onMounted, ref} from 'vue'
 import login from "./components/login.vue";
 import newB from "./components/newB.vue";
 import edit from "./components/edit.vue";
@@ -20,6 +20,11 @@ const handleSelect = (key, keyPath) => {
       break
   }
 }
+
+let changeToOne=()=>{
+  pageRef.value.current = newB;
+}
+
 </script>
 
 <template>
@@ -28,12 +33,13 @@ const handleSelect = (key, keyPath) => {
       class="el-menu-demo"
       mode="horizontal"
       @select="handleSelect"
+      ref="navi"
   >
     <el-menu-item index="1">最新</el-menu-item>
-    <el-menu-item index="2">发送推文</el-menu-item>
-    <el-menu-item index="3">注册or登录</el-menu-item>
+    <el-menu-item index="2" ref="sendP">发送推文</el-menu-item>
+    <el-menu-item index="3">注册&登录</el-menu-item>
   </el-menu>
-  <component :is="pageRef.current">
+  <component :is="pageRef.current" @logSuc="changeToOne">
 
 
   </component>

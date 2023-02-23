@@ -7,9 +7,9 @@
       </button>
     </div>
     <div class="tabcontent">
-<component :is="activeTab=='login'?LoginForm:RegistrationForm">
+      <component :is="activeTab=='login'?LoginForm:RegistrationForm" @logSuc="$emit('logSuc')">
 
-</component>
+      </component>
     </div>
   </div>
 </template>
@@ -25,8 +25,7 @@ let name = 'LoginAndRegistration'
 let activeTab = ref('login')
 
 
-let setActiveTab=(tabName)=>
-{
+let setActiveTab = (tabName) => {
   activeTab.value = tabName;
 }
 
@@ -51,7 +50,8 @@ let setActiveTab=(tabName)=>
 }
 
 .tab button.active {
-  background-color: #ccc;
+  background-color: #409EFF;
+  color: white;
   border-bottom: 1px solid #ccc;
 }
 

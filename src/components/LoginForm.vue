@@ -1,27 +1,22 @@
 <template>
-  <div>
-    <h1>登录</h1>
+  <el-card shadow="hover" class="loginCard">
     <form @submit.prevent="submitForm">
-      <div>
-        <label for="username">用户名：</label>
-        <input type="text" id="username" v-model="username">
-      </div>
-      <div>
-        <label for="password">密码：</label>
-        <input type="password" id="password" v-model="password">
-      </div>
-      <button type="submit" class="btn btn-secondary">登录</button>
+      <el-input id="username" v-model="username" placeholder="用户名" class="input"/>
+      <el-input id="password" type="password" v-model="password" placeholder="密码" class="input" show-password/>
+      <el-button @click="submitForm">登录</el-button>
     </form>
-  </div>
+  </el-card>
 </template>
 
 <script setup>
 import axios from 'axios';
+import {ref} from "vue";
 
 let name = 'LoginForm'
-let username = ''
-let password = ''
+let username = ref('')
+let password = ref('')
 
+let emits = defineEmits(['logSuc'])
 
 let submitForm = () => {
   axios.get('http://20.210.90.22:23000/users')
@@ -34,6 +29,7 @@ let submitForm = () => {
         }
         username = '';
         password = '';
+        emits('logSuc')
       })
       .catch(error => {
         console.log(error);
@@ -44,12 +40,7 @@ let submitForm = () => {
 </script>
 
 <style>
-.btn-primary {
-  background-color: blue;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
+.input {
+  padding-bottom: 20px;
 }
 </style>
