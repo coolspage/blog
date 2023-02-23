@@ -1,38 +1,36 @@
 <template>
   <div>
-    <h1>登录和注册</h1>
+    <h1 class="title">登录和注册</h1>
     <div class="tab">
       <button class="tablinks" :class="{active: activeTab === 'login'}" @click="setActiveTab('login')">登录</button>
-      <button class="tablinks" :class="{active: activeTab === 'register'}" @click="setActiveTab('register')">注册</button>
+      <button class="tablinks" :class="{active: activeTab === 'register'}" @click="setActiveTab('register')">注册
+      </button>
     </div>
     <div class="tabcontent">
-      <login-form v-if="activeTab === 'login'" />
-      <registration-form v-if="activeTab === 'register'" />
+<component :is="activeTab=='login'?LoginForm:RegistrationForm">
+
+</component>
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
 import LoginForm from './LoginForm.vue';
 import RegistrationForm from './RegistrationForm.vue';
+import {ref} from "vue";
 
-export default {
-  name: 'LoginAndRegistration',
-  components: {
-    LoginForm,
-    RegistrationForm
-  },
-  data() {
-    return {
-      activeTab: 'login'
-    };
-  },
-  methods: {
-    setActiveTab(tabName) {
-      this.activeTab = tabName;
-    }
-  }
-};
+let name = 'LoginAndRegistration'
+
+
+let activeTab = ref('login')
+
+
+let setActiveTab=(tabName)=>
+{
+  activeTab.value = tabName;
+}
+
+
 </script>
 
 <style>
@@ -57,11 +55,4 @@ export default {
   border-bottom: 1px solid #ccc;
 }
 
-.tabcontent {
-  display: none;
-}
-
-.tabcontent.show {
-  display: block;
-}
 </style>

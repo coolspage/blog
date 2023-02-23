@@ -15,35 +15,31 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import axios from 'axios';
 
-export default {
-  name: 'LoginForm',
-  data() {
-    return {
-      username: '',
-      password: ''
-    }
-  },
-  methods: {
-    submitForm() {
-      axios.get('http://20.210.90.22:23000/users')
-          .then(response => {
-            const user = response.data.find(user => user.username === this.username && user.password === this.password);
-            if (user) {
-              console.log('Logged in');
-            } else {
-              console.log('Invalid username or password');
-            }
-            this.username = '';
-            this.password = '';
-          })
-          .catch(error => {
-            console.log(error);
-          });
-    }
-  }
+let name = 'LoginForm'
+let username = ''
+let password = ''
+
+
+let submitForm = () => {
+  axios.get('http://20.210.90.22:23000/users')
+      .then(response => {
+        const user = response.data.find(user => user.username === username && user.password === password);
+        if (user) {
+          console.log('Logged in');
+        } else {
+          console.log('Invalid username or password');
+        }
+        username = '';
+        password = '';
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
+
 }
 </script>
 
